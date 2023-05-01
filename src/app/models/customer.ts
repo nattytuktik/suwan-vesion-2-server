@@ -26,6 +26,14 @@ const customerShema = new Schema({
     required: false,
   },
 
+  password: {
+    type: String,
+  },
+
+  token: {
+    type: String,
+  },
+
   permission: {
     type: String,
     enum: ['admin', 'user', 'superadmin'],
@@ -33,4 +41,4 @@ const customerShema = new Schema({
   },
 });
 
-export const Custormer = model('custormers', customerShema);
+export const Customer = model('custormers', customerShema);

@@ -14,14 +14,16 @@ export default class Suwan {
   initRouting(routers: Array<{ endpoint: string; router: Router }> | null) {
     if (routers) {
       for (let router of routers) {
-        return this.app.use(router.endpoint, router.router);
+        this.app.use(router.endpoint, router.router);
       }
     }
   }
 
-  initMiddlewares(middlewares: Array<any>) {
-    for (let middleware of middlewares) {
-      return this.app.use(middleware);
+  initMiddlewares(middlewares: Array<any> = []) {
+    if (middlewares.length > 0) {
+      for (let middleware of middlewares) {
+        return this.app.use(middleware);
+      }
     }
   }
 

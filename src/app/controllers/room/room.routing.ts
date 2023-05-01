@@ -1,34 +1,22 @@
 import { test } from '../../middlewares/test';
 import many from './get/many';
 import id from './get/id';
-import { create } from './post/create';
+import create from './post/create';
+import { IRoute } from '../../../interfaces/IRoutes';
 
-export default [
-  // get methods
+export const roomRouting: Array<IRoute> = [
   {
     path: '/',
     controllers: [
       {
         method: 'get',
         action: many.readAgregratefeild,
+        middlewares: [],
       },
       {
         method: 'post',
         action: create,
-        middlewares: [test],
-      },
-    ],
-  },
-  {
-    path: '/all',
-    controller: [
-      {
-        method: 'get',
-        action: many.readAllfeild,
-      },
-      {
-        method: 'get',
-        action: id.readAllfeild,
+        middlewares: [],
       },
     ],
   },

@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import { Application, Router } from 'express';
 
-export interface IRoutes {
+export interface IRoute {
   path: string;
   controllers: Array<{
     method: string;
-    action: Router;
+    action: Function;
     middlewares: Array<Function>;
   }>;
 }

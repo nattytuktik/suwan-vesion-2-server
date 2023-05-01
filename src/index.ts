@@ -3,6 +3,7 @@ import express, { urlencoded } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import roomRouter from './app/routes/room';
+import adminRouter from './app/routes/admin';
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI || null;
 const PORT = Number(process.env.PORT || 5002);
@@ -26,6 +27,10 @@ suwan.initRouting([
   {
     endpoint: '/room',
     router: roomRouter,
+  },
+  {
+    endpoint: '/admin',
+    router: adminRouter,
   },
 ]);
 

@@ -2,24 +2,25 @@ import { Request, Response } from "express";
 import { Customer } from "../../../models/customer";
 import { Admin } from "../../../models/admin";
 
-const HAST_BCRYPT = process.env.HAST_BCRYPT || undefined;
-
 export default async function updateAdmin(req: Request, res: Response) {
     try {
         const { oldadmin, newadmin } = req.body;
-        const findAdmin = await Admin.findOneAndUpdate(
+        const findAndSetAdmin = await Admin.findOneAndUpdate(
             { _id: oldadmin },
             { $set: { customer: newadmin } },
         );
+        const findAndSetCustomer = await Customer.findOneAndUpdate(
+            { _id: newadmin },
+            { $set: { permission: "admin" } },
+        );
 
-        console.log(findAdmin);
-
-        if (!findAdmin) {
+        if (!findAndSetAdmin || !findAndSetCustomer) {
             res.status(404).json({
                 msg: "not found oldadmin",
             });
         } else {
-            findAdmin.save();
+            findAndSetAdmin.save();
+            findAndSetCustomer.save();
             res.status(200).json({
                 msg: "update admin successfully",
             });

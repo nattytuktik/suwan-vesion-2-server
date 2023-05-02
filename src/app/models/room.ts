@@ -1,28 +1,28 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema } from "mongoose";
 
 const roomShema = new Schema({
-  room: {
-    type: Number,
-    required: true,
-    max: 6,
-  },
+    room: {
+        type: Number,
+        required: true,
+        max: 6,
+    },
 
-  foor: {
-    type: Number,
-    max: 3,
-    required: true,
-  },
+    foor: {
+        type: Number,
+        max: 3,
+        required: true,
+    },
 
-  section: {
-    type: Number,
-    required: true,
-  },
+    section: {
+        type: Number,
+        required: true,
+    },
 
-  mitor: {
-    type: Schema.Types.ObjectId,
-    ref: 'Mitor',
-    required: true,
-  },
+    mitor: {
+        type: Schema.Types.ObjectId,
+        ref: "Mitor",
+        required: true,
+    },
 });
 
-export const Room = model('rooms', roomShema);
+export const Room = model("rooms", roomShema);

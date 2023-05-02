@@ -1,50 +1,57 @@
-import express, { Application, Router } from 'express';
-import mongoose from 'mongoose';
+import express, { Application, Router } from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 export default class Suwan {
-  public port = 5001;
-  private app: Application;
+    public port = 5001;
+    private app: Application;
 
-  // init
-  constructor({ port }: { port: number }) {
-    this.port = port;
-    this.app = express();
-  }
-
-  initRouting(routers: Array<{ endpoint: string; router: Router }> | null) {
-    if (routers) {
-      for (let router of routers) {
-        this.app.use(router.endpoint, router.router);
-      }
+    // init
+    constructor({ port }: { port: number }) {
+        this.port = port;
+        this.app = express();
     }
-  }
 
-  initMiddlewares(middlewares: Array<any> = []) {
-    if (middlewares.length > 0) {
-      for (let middleware of middlewares) {
-        return this.app.use(middleware);
-      }
+    initRouting(routers: Array<{ endpoint: string; router: Router }> | null) {
+        if (routers) {
+            for (let router of routers) {
+                this.app.use(router.endpoint, router.router);
+            }
+        }
     }
-  }
 
-  connectDatabase({ uri, options = {} }: { uri: string | null; options: {} }) {
-    if (uri) {
-      try {
-        mongoose.connect(uri, options || {});
-        return true;
-      } catch (error) {
-        console.log('conect database error', error);
-        return false;
-      }
-    } else {
-      console.log('uri for connect database not found');
-      return false;
+    initMiddlewares(middlewares: Array<any>) {
+        if (middlewares.length > 0) {
+            for (let middleware of middlewares) {
+                this.app.use(middleware);
+            }
+        }
     }
-  }
 
-  startServer() {
-    this.app.listen(this.port, () => {
-      console.log(`server start at http://localhost:${this.port}`);
-    });
-  }
+    connectDatabase({
+        uri,
+        options = {},
+    }: {
+        uri: string | null;
+        options: {};
+    }) {
+        if (uri) {
+            try {
+                mongoose.connect(uri, options || {});
+                return true;
+            } catch (error) {
+                console.log("conect database error", error);
+                return false;
+            }
+        } else {
+            console.log("uri for connect database not found");
+            return false;
+        }
+    }
+
+    startServer() {
+        this.app.listen(this.port, () => {
+            console.log(`server start at http://localhost:${this.port}`);
+        });
+    }
 }

@@ -20,9 +20,30 @@ const roomShema = new Schema({
 
     mitor: {
         type: Schema.Types.ObjectId,
-        ref: "Mitor",
-        required: true,
+        ref: "mitors",
     },
+
+    customers: [
+        {
+            _id: false,
+            customerId: {
+                type: Schema.Types.ObjectId,
+                ref: "Customer",
+            },
+            time_alive: {
+                type: Date,
+                default: Date.now(),
+            },
+            time_leave: {
+                type: Date,
+            },
+            status: {
+                type: String,
+                enum: ["alive", "leave"],
+                default: "alive",
+            },
+        },
+    ],
 });
 
 export const Room = model("rooms", roomShema);

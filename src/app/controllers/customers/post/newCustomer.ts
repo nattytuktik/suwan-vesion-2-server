@@ -4,7 +4,6 @@ import { Customer } from "../../../models/customer";
 export default async function newCustomer(
     req: express.Request,
     res: express.Response,
-    next: express.NextFunction,
 ) {
     try {
         const { customer } = req.body;

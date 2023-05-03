@@ -4,6 +4,6 @@ import { customerRouting } from "../controllers/customers/customer.routing";
 
 const router = Router();
 
-registerRoutes(router, ["get", "post"], customerRouting);
+registerRoutes(router, customerRouting);
 
 export default router;

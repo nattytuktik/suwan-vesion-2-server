@@ -6,9 +6,14 @@ export default async function readNotFill(
     res: express.Response,
 ) {
     try {
-        const readAllRoom = await Room.find({}).populate("mitor");
+        const readAllRoom = await Room.find({})
+            .populate("mitor")
+            .populate("customers");
         res.status(200).json(readAllRoom);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
+        res.status(500).json({
+            msg: error.message,
+        });
     }
 }

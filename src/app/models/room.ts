@@ -25,23 +25,8 @@ const roomShema = new Schema({
 
     customers: [
         {
-            _id: false,
-            customerId: {
-                type: Schema.Types.ObjectId,
-                ref: "Customer",
-            },
-            time_alive: {
-                type: Date,
-                default: Date.now(),
-            },
-            time_leave: {
-                type: Date,
-            },
-            status: {
-                type: String,
-                enum: ["alive", "leave"],
-                default: "alive",
-            },
+            type: Schema.Types.ObjectId,
+            ref: "customers",
         },
     ],
 });

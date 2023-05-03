@@ -7,7 +7,6 @@ export default async function pushCustomerToRoom(
 ) {
     try {
         const { customerId, roomId } = req.body;
-
         if (!customerId && !roomId) {
             res.status(400).json({
                 msg: "customerId or mitorId not found in request.body",
@@ -19,13 +18,10 @@ export default async function pushCustomerToRoom(
                 status: "alive",
             };
 
+            // push the customer to the database!
             const pushCustomer = await Room.findOneAndUpdate(
                 { _id: roomId },
-                {
-                    $push: {
-                        customers: customer,
-                    },
-                },
+                { $push: { customers: customerId } },
             );
 
             if (!pushCustomer) {

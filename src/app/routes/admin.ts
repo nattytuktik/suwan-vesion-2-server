@@ -3,6 +3,6 @@ import { adminRouting } from "../controllers/admin/admin.routing";
 import { registerRoutes } from "../../lib/routers/addRoutesToRouter";
 const router = Router();
 
-registerRoutes(router, ["post", "get", "put", "delete"], adminRouting);
+registerRoutes(router, adminRouting);
 
 export default router;

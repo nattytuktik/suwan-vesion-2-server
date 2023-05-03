@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { IRoute } from "../../interfaces/IRoutes";
 
+const methods = ["get", "post", "put", "delete",];
+
 export const registerRoutes = function (
     router: any,
-    methods: Array<string>,
     routes: Array<IRoute>,
 ) {
     if (!routes || routes.length === 0) {
@@ -25,5 +26,5 @@ export const registerRoutes = function (
         }
     });
 
-    registerRoutes(router, methods, routes);
+    registerRoutes(router, routes);
 };

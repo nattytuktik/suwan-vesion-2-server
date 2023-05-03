@@ -31,6 +31,21 @@ const customerShema = new Schema({
         enum: ["admin", "user", "superadmin"],
         default: "user",
     },
+
+    time_alive: {
+        type: Date,
+        default: Date.now(),
+    },
+
+    status: {
+        type: String,
+        enum: ["alive", "leave"],
+        default: "alive",
+    },
+
+    time_leave: {
+        type: Date,
+    },
 });
 
 export const Customer = model("customers", customerShema);

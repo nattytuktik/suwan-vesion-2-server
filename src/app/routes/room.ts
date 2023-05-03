@@ -7,7 +7,7 @@ const router = Router();
 const methods = ["get", "post", "put", "delete"];
 
 // room
-registerRoutes(router, methods, roomRouting);
+registerRoutes(router, roomRouting);
 
 // router.post('/', create);
 export default router;

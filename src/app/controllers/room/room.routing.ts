@@ -4,6 +4,8 @@ import { IRoute } from "../../../interfaces/IRoutes";
 import createRoom from "./post/create";
 import readNotFill from "./get/readNotFill";
 import pushCustomerToRoom from "./put/pushCustomerToRoom";
+import findHasCustomerInRoom from "../../middlewares/room/findHasCustomerRoom";
+import filterNullRequest from "../../middlewares/room/filterNullAndObjectIdrequest";
 
 export const roomRouting: Array<IRoute> = [
     {
@@ -27,7 +29,7 @@ export const roomRouting: Array<IRoute> = [
             {
                 method: "put",
                 action: pushCustomerToRoom,
-                middlewares: [],
+                middlewares: [filterNullRequest, findHasCustomerInRoom],
             },
         ],
     },

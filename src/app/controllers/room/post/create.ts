@@ -9,10 +9,11 @@ export default async function creteRoom(req: Request, res: Response) {
         const { mitor, room } = req.body;
         const newRoom = new Room({ ...room });
         const newMitor = new Mitor();
-        newMitor.mitor.push({ ...mitor });
-        newRoom.mitor = newMitor._id;
-
+        newMitor.mitor.push({ ...mitor, time_edit: Date.now() });
+        // save mitor
         newMitor.save();
+
+        newRoom.mitor = newMitor._id;
         newRoom.save();
         res.status(200).json({
             msg: "create new room success fully",

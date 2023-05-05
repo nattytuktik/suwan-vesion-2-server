@@ -7,16 +7,23 @@ export default async function filterNullRequest(
 ) {
     try {
         const values = Object.keys(req.body);
-        const filvalues = values.filter(
+
+        /**
+         * filter null requests
+         */
+        const fillvalues = values.filter(
             (v) =>
                 !Boolean(req.body[v].trim()) ||
                 !isObjectIdOrHexString(req.body[v]),
         );
 
-        if (filvalues.length > 0) {
+        /**
+         * Checks filter values for
+         */
+        if (fillvalues.length > 0) {
             res.status(400).json({
                 ...req.body,
-                errors: filvalues,
+                errors: fillvalues,
             });
         } else {
             next();

@@ -5,7 +5,7 @@ import createRoom from "./post/create";
 import readNotFill from "./get/readNotFill";
 import pushCustomerToRoom from "./put/pushCustomerToRoom";
 import findHasCustomerInRoom from "../../middlewares/room/findHasCustomerRoom";
-import filterNullRequest from "../../middlewares/room/filterNullAndObjectIdrequest";
+import filterNullRequest from "../../middlewares/filterNullAndObjectIdrequest";
 
 export const roomRouting: Array<IRoute> = [
     {

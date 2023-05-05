@@ -31,7 +31,7 @@ suwan.initRouting([
         router: roomRouter,
     },
     {
-        endpoint: "/admin",
+        endpoint: "/auth",
         router: adminRouter,
     },
     {

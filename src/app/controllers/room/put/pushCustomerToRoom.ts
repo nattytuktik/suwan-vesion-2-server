@@ -34,10 +34,11 @@ export default async function pushCustomerToRoom(
                 });
             }
         }
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
         res.status(500).json({
             msg: "internal error at pushCustomerToRoom controller",
+            error: error.message,
         });
     }
 }

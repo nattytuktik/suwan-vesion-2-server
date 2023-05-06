@@ -15,6 +15,7 @@ const roomShema = new Schema({
 
     section: {
         type: Number,
+        max: 2,
         required: true,
     },
 

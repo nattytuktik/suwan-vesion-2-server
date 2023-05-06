@@ -6,9 +6,10 @@ import login from "./post/login";
 import updateAdmin from "./post/updateAdmin";
 
 // import middlewares
-import chekHadAdmin from "../../middlewares/admin/checkHadAdmin";
+import chekHadAdmin from "../../middlewares/auth/checkHadAdmin";
 import validToken from "../../middlewares/auth/validtoken";
 import filterNullRequest from "../../middlewares/filterNullAndObjectIdrequest";
+import tokenTime from "./get/tokenTime";
 
 export const adminRouting: Array<IRoute> = [
     {
@@ -40,5 +41,10 @@ export const adminRouting: Array<IRoute> = [
                 middlewares: [],
             },
         ],
+    },
+
+    {
+        path: "/token-time",
+        controllers: [{ method: "get", action: tokenTime, middlewares: [] }],
     },
 ];

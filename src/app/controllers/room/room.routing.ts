@@ -6,6 +6,9 @@ import readNotFill from "./get/readNotFill";
 import pushCustomerToRoom from "./put/pushCustomerToRoom";
 import findHasCustomerInRoom from "../../middlewares/room/findHasCustomerRoom";
 import filterNullRequest from "../../middlewares/filterNullAndObjectIdrequest";
+import isOldRoom from "../../middlewares/room/isOldRoom";
+import validSpecialRoom from "../../middlewares/room/validSpecialRoom";
+import validRoomRequest from "../../middlewares/room/validRoomRequest";
 
 export const roomRouting: Array<IRoute> = [
     {
@@ -19,7 +22,7 @@ export const roomRouting: Array<IRoute> = [
             {
                 method: "post",
                 action: createRoom,
-                middlewares: [],
+                middlewares: [validRoomRequest, isOldRoom, validSpecialRoom],
             },
         ],
     },

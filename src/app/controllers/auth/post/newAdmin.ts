@@ -28,8 +28,6 @@ export default async function newAdmin(req: Request, res: Response) {
                 parseInt(HASH_BCRYPT),
             );
 
-            console.log(hashPassword);
-
             // setting prrmission admin for customer has been admin
             newCustomer.permission = "admin";
 

@@ -30,6 +30,7 @@ export default async function readNotFill(
             sect1: customerResultSect1,
             sect2: customerResultSect2,
         };
+
         res.status(200).json(result);
     } catch (error: any) {
         console.log(error);
@@ -47,13 +48,14 @@ const customResponse = async (
     const result = rooms.map(async (room) => {
         let validDatetimeMonth: boolean;
         const custom = {
+            mitor_id: "",
             last_month: {
                 num: 0,
-                time_edit: new Date(),
+                time_edit: new Date().toString(),
             },
             current_month: {
                 num: 0,
-                time_edit: new Date(),
+                time_edit: new Date().toString(),
             },
             bill: {
                 internet: 0,
@@ -62,10 +64,10 @@ const customResponse = async (
             },
         };
         const mitors = await Mitor.findOne(room.mitor);
-        let findMitor;
 
         if (mitors) {
             const length_mitor = mitors.mitor.length;
+            custom.mitor_id = mitors._id.toHexString();
             if (length_mitor > 2) {
                 const Findlast_month = mitors.mitor[length_mitor - 2];
                 const Findcurrent_month = mitors.mitor[length_mitor - 1];
@@ -74,10 +76,14 @@ const customResponse = async (
 
                 // last month
                 last_month.num = Findlast_month.num;
-                last_month.time_edit = Findlast_month.time_edit;
+                last_month.time_edit = new Date(
+                    Findlast_month.time_edit,
+                ).toString();
 
                 // current month
-                current_month.time_edit = Findcurrent_month.time_edit;
+                current_month.time_edit = new Date(
+                    Findcurrent_month.time_edit,
+                ).toString();
                 current_month.num = Findcurrent_month.num;
 
                 // bill
@@ -87,6 +93,9 @@ const customResponse = async (
                 bill.maintenance = 20;
             } else {
                 custom.current_month.num = 0;
+                custom.last_month.time_edit = new Date(
+                    mitors.mitor[length_mitor - 1].time_edit,
+                ).toString();
             }
         }
 
@@ -96,7 +105,7 @@ const customResponse = async (
             room: room.room,
             foor: room.foor,
             section: room.section,
-            // ...custom,
+            ...custom,
         };
     });
 
